@@ -22,7 +22,6 @@ export const cartSlice = createSlice(
                 else {
                     state.cart.push(action.payload);
                 }
-
             }
         },
     }
