@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decreamentItem, getCartTotal, incrementItem, removeItem } from '../features/cartSlice';
+import { decrementItem, getCartTotal, incrementItem, removeItem } from '../features/cartSlice';
 
 const CartPage = () => {
     const { cart, totalQuantity, totalPrice } = useSelector((state) => state.allCart);
@@ -49,7 +49,7 @@ const CartPage = () => {
                                         <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
                                             <div className="d-flex mb-4" style={{ maxWidth: "300px" }}>
                                                 <button className="btn btn-primary px-3 me-2"
-                                                    onClick={() => dispatch(decreamentItem(data.id))}>
+                                                    onClick={() => dispatch(decrementItem(data.id))}>
                                                     <i className="fas fa-minus"></i>
                                                 </button>
 
