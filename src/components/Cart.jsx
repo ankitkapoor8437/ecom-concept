@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartTotal } from '../features/cartSlice';
+import { decreamentItem, getCartTotal, incrementItem, removeItem } from '../features/cartSlice';
 
 const CartPage = () => {
     const { cart, totalQuantity, totalPrice } = useSelector((state) => state.allCart);
@@ -18,7 +18,7 @@ const CartPage = () => {
                     <div className="col-md-8">
                         <div className="card mb-4">
                             <div className="card-header py-3">
-                                <h5 className="mb-0">Cart - {totalQuantity} items</h5>
+                                <h5 className="mb-0">Cart - {cart.length} items</h5>
                             </div>
                             <div className="card-body">
                                 {cart.map((data) => (
@@ -36,7 +36,7 @@ const CartPage = () => {
                                             <p><strong>{data.title}</strong></p>
                                             <p>Color: blue</p>
                                             <p>Size: M</p>
-                                            <button type="button" className="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                            <button type="button" onClick={() => dispatch(removeItem(data.id))} className="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                                                 title="Remove item">
                                                 <i className="fas fa-trash"></i>
                                             </button>
@@ -49,7 +49,7 @@ const CartPage = () => {
                                         <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
                                             <div className="d-flex mb-4" style={{ maxWidth: "300px" }}>
                                                 <button className="btn btn-primary px-3 me-2"
-                                                    onClick={() => this.parentNode.querySelector('input[type=number]').stepDown()}>
+                                                    onClick={() => dispatch(decreamentItem(data.id))}>
                                                     <i className="fas fa-minus"></i>
                                                 </button>
 
@@ -59,8 +59,7 @@ const CartPage = () => {
                                                 </div>
 
                                                 <button className="btn btn-primary px-3 ms-2"
-                                                    onClick={() => this.parentNode.querySelector('input[type=number]').stepUp()}>
-                                                    <i className="fas fa-plus"></i>
+                                                    onClick={() => dispatch(incrementItem(data.id))}>                                                    <i className="fas fa-plus"></i>
                                                 </button>
                                             </div>
 
