@@ -1,9 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCartTotal } from '../features/cartSlice';
 
 const CartPage = () => {
     const { cart, totalQuantity, totalPrice } = useSelector((state) => state.allCart);
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCartTotal());
+    }, [cart]);
 
     return (
         <section className="h-100 gradient-custom">
@@ -12,15 +18,14 @@ const CartPage = () => {
                     <div className="col-md-8">
                         <div className="card mb-4">
                             <div className="card-header py-3">
-                                <h5 className="mb-0">Cart - {cart.length} items</h5>
+                                <h5 className="mb-0">Cart - {totalQuantity} items</h5>
                             </div>
                             <div className="card-body">
                                 {cart.map((data) => (
                                     <div className="row">
                                         <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                             <div className="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                                                <img src={data.img}
-                                                    className="w-100" alt="Blue Jeans Jacket" />
+                                                <img src={data.img} className="w-100" alt="Blue Jeans Jacket" />
                                                 <a href="#!">
                                                     <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}></div>
                                                 </a>
@@ -60,7 +65,7 @@ const CartPage = () => {
                                             </div>
 
                                             <p className="text-start text-md-center">
-                                                <strong>$17.99</strong>
+                                                <strong>{data.price}</strong>
                                             </p>
                                         </div>
                                     </div>

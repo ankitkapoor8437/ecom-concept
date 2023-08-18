@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     MDBContainer,
     MDBNavbar,
     MDBNavbarBrand,
     MDBBtn,
 } from 'mdb-react-ui-kit';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getCartTotal } from '../features/cartSlice';
 
 export default function App() {
-    const count = useSelector((state) => state.allCart.cart);
+    const { cart, totalQuantity } = useSelector((state) => state.allCart);
+
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCartTotal());
+    }, [cart]);
+
 
     return (
         <MDBNavbar light bgColor='light'>
@@ -23,7 +32,7 @@ export default function App() {
 
                 <MDBBtn color='light'>
                     <Link to="/cart">
-                        Cart ({count.length})
+                        Cart ({totalQuantity})
                     </Link>
                 </MDBBtn>
             </MDBContainer>
