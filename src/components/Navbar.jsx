@@ -23,7 +23,11 @@ export default function App() {
     return (
         <MDBNavbar light bgColor='light'>
             <MDBContainer fluid>
-                <MDBNavbarBrand>Navbar</MDBNavbarBrand>
+                <MDBNavbarBrand>
+                    <Link to="/">
+                    Navbar
+                    </Link>
+                    </MDBNavbarBrand>
                 <span>
                     <Link to="/">
                         All Products
